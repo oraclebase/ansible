@@ -1,2 +1,3 @@
-# ansible
-Ansible Tutorials
+# Ansible Tutorials
+
+A repository to hold some basic Ansible tutorials.
