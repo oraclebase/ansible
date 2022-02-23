@@ -1,0 +1,20 @@
+- name: Create database groups
+  group:
+    gid: "{{ item.group_id}}"
+    name: "{{ item.group_name}}"
+    state: present
+  with_items:
+    - { group_name: oinstall , group_id: 54321} 
+    - { group_name: dba, group_id: 54322} 
+    - { group_name: oper, group_id: 54323 }
+
+- name: Create oracle user
+  user:
+    uid: 54321
+    name: oracle
+    password: "{{ 'DummyPassword123' | password_hash('sha512', 'mysecretsalt') }}"
+    groups: oinstall,dba,oper
+    append: yes
+    state: present
+    update_password: on_create
+

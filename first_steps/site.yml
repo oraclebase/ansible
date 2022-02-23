@@ -1,0 +1,20 @@
+---
+
+- name: Base role for all servers
+  hosts: all
+  become: true
+  roles:
+    - base
+
+- name: Base role for application servers
+  hosts: appservers
+  become: true
+  roles:
+    - appservers
+
+- name: Base role for database servers
+  hosts: databases
+  become: true
+  roles:
+    - databases
+
