@@ -1,0 +1,20 @@
+---
+
+- name: Configure appservers
+  hosts: appservers
+  become: true
+  tasks:
+
+  - name: Amend nginx.conf
+    lineinfile:
+      state: present
+      dest: /etc/nginx/nginx.conf
+      line: "# One silly a line added."
+    register: nginx1
+
+  - name: Restart nginx
+    service:
+      name: nginx
+      state: restarted
+    when: nginx1.changed
+

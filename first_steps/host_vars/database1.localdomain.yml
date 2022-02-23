@@ -1,0 +1,14 @@
+hostname: database1.localdomain
+short_hostname: database1
+ip_address: 192.168.56.103
+packages:
+  - zip
+  - unzip
+  - tar
+  - cpio
+  - tmux
+  - oracle-database-preinstall-19c
+fwrules:
+  - 22/tcp
+  - 1521/tcp
+ssh_users: "oracle tim"

@@ -1,0 +1,24 @@
+- name: Use host variables
+  hosts: databases
+  become: true
+  tasks:
+
+  - name: Add hosts entry 
+    lineinfile:
+      state: present
+      dest: /etc/hosts
+      line: "{{ ip_address }} {{ hostname }} {{ short_hostname }}"
+  
+  - name: Install packages
+    dnf:
+      name: "{{ packages }}"
+      update_cache: yes
+      state: latest
+
+  - name: Configure firewall
+    firewalld:
+      port: "{{ item }}"
+      permanent: yes
+      state: enabled
+    with_items: "{{ fwrules }}"
+

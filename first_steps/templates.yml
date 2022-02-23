@@ -1,0 +1,21 @@
+---
+
+- name: Configure databases
+  hosts: databases
+  become: true
+  tasks:
+
+  - name: Generate 99-my-sshd-users.conf file
+    template:
+      src: 99-my-sshd-users.conf.j2
+      dest: /etc/ssh/ssh_config.d/99-my-sshd-users.conf
+      group: root
+      owner: root
+      mode: 0644
+    notify: Restart sshd
+
+  handlers:
+  - name: Restart sshd
+    service:
+      name: sshd
+      state: restarted
