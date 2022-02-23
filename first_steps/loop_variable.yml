@@ -1,0 +1,19 @@
+---
+
+- name: Configure firewall
+  hosts: appservers
+  become: true
+  vars:
+    fwrules:
+      - { port: 80/tcp, state: disabled } 
+      - { port: 443/tcp, state: enabled } 
+      - { port: 8080/tcp, state: disabled } 
+      - { port: 8443/tcp, state: disabled }
+  tasks:
+
+  - name: Allow web through the firewall
+    firewalld:
+      port: "{{ item.port }}"
+      permanent: yes
+      state: "{{ item.state}}"
+    with_items: "{{ fwrules }}"

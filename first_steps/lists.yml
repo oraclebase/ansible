@@ -1,0 +1,16 @@
+---
+
+- name: Configure NGINX servers
+  hosts: all
+  become: true
+  tasks:
+
+  - name: Install packages
+    dnf:
+      name:
+        - zip
+        - unzip
+        - wget
+      state: present
+      update_cache: yes
+

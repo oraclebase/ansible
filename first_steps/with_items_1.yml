@@ -1,0 +1,17 @@
+---
+
+- name: Configure firewall
+  hosts: appservers
+  become: true
+  tasks:
+
+  - name: Allow web through the firewall
+    firewalld:
+      port: "{{ item }}"
+      permanent: yes
+      state: enabled
+    with_items:
+      - 80/tcp
+      - 443/tcp
+      - 8080/tcp
+      - 8443/tcp

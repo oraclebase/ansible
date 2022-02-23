@@ -1,0 +1,44 @@
+---
+
+- name: Configure NGINX servers
+  hosts: appservers
+  become: true
+  tasks:
+  
+  - name: Install NGINX package (DNF)
+    dnf:
+      name: nginx
+      state: present
+      update_cache: yes
+    when: ansible_distribution in ["OracleLinux", "Red Hat Enterprise Linux", "CentOS"]
+
+  - name: Install NGINX package (APT)
+    apt:
+      name: nginx
+      state: present
+      update_cache: yes
+    when: ansible_distribution in ["Ubuntu", "Debian"]
+
+  - name: Enable and start NGINX service
+    service:
+      name: nginx
+      enabled: yes
+      state: started
+
+  - name: Allow SSH traffic through the firewall
+    firewalld:
+      service: ssh
+      permanent: yes
+      state: enabled
+
+  - name: Allow HTTPS traffic through the firewall
+    firewalld:
+      service: https
+      permanent: yes
+      state: enabled
+
+  - name: Enable the firewall
+    service:
+      name: firewalld
+      enabled: yes
+      state: started

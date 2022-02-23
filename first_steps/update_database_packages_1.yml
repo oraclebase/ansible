@@ -1,0 +1,12 @@
+---
+
+- name: Patch servers
+  hosts: databases
+  become: true
+  tasks:
+
+  - name: Update all packages
+    dnf:
+      name: "*"
+      update_cache: yes
+      state: latest

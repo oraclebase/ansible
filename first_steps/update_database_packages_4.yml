@@ -1,0 +1,26 @@
+---
+
+- name: Patch servers
+  hosts: databases
+  become: true
+  tasks:
+
+  - name: Update all packages (DNF)
+    dnf:
+      name: "*"
+      update_cache: yes
+      state: latest
+    when: ansible_distribution in ["OracleLinux", "Red Hat Enterprise Linux", "CentOS"]
+    register: dnf_update
+
+  - name: Update all packages (APT)
+    dnf:
+      name: "*"
+      update_cache: yes
+      state: latest
+    when: ansible_distribution in ["Ubuntu", "Debian"]
+    register: atp_update
+
+  - name: Reboot server
+    reboot:
+    when: dnf_update.changed or atp_update.changed
