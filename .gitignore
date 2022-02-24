@@ -1,0 +1,8 @@
+# Software Files #
+##################
+*.gz
+*.zip
+*.jar
+*.bin
+*.vdi
+*.rpm
