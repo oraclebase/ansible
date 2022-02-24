@@ -1,0 +1,10 @@
+---
+
+- name: Use group variables
+  hosts: appservers
+  tasks:
+
+  - name: Show variable value
+    debug:
+      var: ssh_users
+

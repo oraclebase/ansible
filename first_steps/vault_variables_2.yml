@@ -1,0 +1,11 @@
+---
+
+- name: Use vault variables
+  hosts: databases
+  vars_files: my_vault.yml
+  tasks:
+
+  - name: Show vault variable value
+    debug:
+      var: cdb1_sys_password
+

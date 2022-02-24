@@ -1,0 +1,10 @@
+---
+
+- name: Use vault variables
+  hosts: databases
+  tasks:
+
+  - name: Show vault variable value
+    debug:
+      var: cdb1_sys_password
+
