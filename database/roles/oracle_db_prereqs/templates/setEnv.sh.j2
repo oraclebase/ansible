@@ -1,0 +1,19 @@
+# Regular settings.
+export TMP=/tmp
+export TMPDIR=$TMP
+export ORACLE_HOSTNAME={{ hostname }}
+export ORACLE_UNQNAME={{ oracle_unqname }}
+export ORACLE_BASE={{ oracle_base }}
+export ORACLE_HOME=$ORACLE_BASE/{{ oracle_home_ext }}
+export ORA_INVENTORY={{ ora_inventory }}
+export ORACLE_SID={{ oracle_sid }}
+export PDB_NAME={{ pdb_name }}
+export DATA_DIR={{ data_dir }}
+export PATH=/usr/sbin:/usr/local/bin:$PATH
+export PATH=$ORACLE_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
+export CLASSPATH=$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+export ORA_INVENTORY={{ ora_inventory }}
+
+export SOFTWARE_DIR={{ software_dir }}
+export SID_LIST={{ oracle_sid }}

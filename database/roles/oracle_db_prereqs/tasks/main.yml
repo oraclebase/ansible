@@ -1,0 +1,51 @@
+- name: Create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: oracle
+    group: oinstall
+  with_items:
+    - "{{ scripts_dir }}"
+    - "{{ oracle_base }}/{{ oracle_home_ext }}"
+    - "{{ data_dir }}"
+    - "{{ software_dir }}"
+
+- name: Generate templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: oracle
+    group: oinstall
+    mode: "u=rwx,g=r,o=r"
+  with_items:
+    - { src: "setEnv.sh.j2", dest: "{{ scripts_dir }}/setEnv.sh" }
+    - { src: "start_all.sh.j2", dest: "{{ scripts_dir }}/start_all.sh" }
+    - { src: "stop_all.sh.j2", dest: "{{ scripts_dir }}/stop_all.sh" }
+    - { src: "oracle_software_installation.sh.j2", dest: "{{ software_dir }}/oracle_software_installation.sh" }
+    - { src: "oracle_root_scripts.sh.j2", dest: "{{ software_dir }}/oracle_root_scripts.sh" }
+    - { src: "oracle_software_patch.sh.j2", dest: "{{ software_dir }}/oracle_software_patch.sh" }
+    - { src: "oracle_create_database.sh.j2", dest: "{{ software_dir }}/oracle_create_database.sh" }
+    - { src: "dbora.service.j2", dest: "{{ software_dir }}/dbora.service" }
+
+- name: Source setEnv.sh from .bash_profile
+  lineinfile:
+    state: present
+    dest: /home/oracle/.bash_profile
+    line: ". {{ scripts_dir }}/setEnv.sh"
+
+- name: Check if software already exists
+  stat:
+    path: "{{ software_dir }}/{{ db_software }}"
+  register: software_result
+       
+- name: Copy files to {{ software_dir }}
+  copy:
+    src: "{{ item }}"
+    dest: "{{ software_dir }}/{{ item }}"
+    owner: oracle
+    group: oinstall
+  with_items:
+    - "{{ db_software }}"
+    - "{{ opatch_file }}"
+    - "{{ patch_file }}"
+  when: not software_result.stat.exists

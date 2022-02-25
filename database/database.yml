@@ -1,0 +1,50 @@
+---
+
+- name: Configure OS prerequisites
+  hosts: databases
+  become: true
+  become_user: root
+  roles:
+    - oracle_os_prereqs
+
+- name: Configure DB prerequisites
+  hosts: databases
+  become: true
+  become_user: root
+  roles:
+    - oracle_db_prereqs
+
+- name: Install Oracle Software
+  hosts: databases
+  become: true
+  become_user: oracle
+  roles:
+    - oracle_sw_install
+
+- name: Run root scripts
+  hosts: databases
+  become: true
+  become_user: root
+  roles:
+    - oracle_root_scripts
+
+- name: Patch Oracle software
+  hosts: databases
+  become: true
+  become_user: oracle
+  roles:
+    - oracle_sw_patch
+
+- name: Create database
+  hosts: databases
+  become: true
+  become_user: oracle
+  roles:
+    - oracle_create_db
+
+- name: Create dbora service
+  hosts: databases
+  become: true
+  become_user: root
+  roles:
+    - oracle_create_service

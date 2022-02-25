@@ -1,0 +1,46 @@
+. {{ scripts_dir }}/setEnv.sh
+
+# Stop script running more than once.
+if [[ -f ${ORACLE_HOME}/patched.ansible ]]
+then
+  exit 0
+fi
+
+
+# This patch script should only be used for a clean installation.
+# It doesn't patch existing databases.
+echo "******************************************************************************"
+echo "Patch Oracle Software." `date`
+echo "******************************************************************************"
+ 
+export PATH=${ORACLE_HOME}/OPatch:${PATH}
+
+echo "******************************************************************************"
+echo "Prepare opatch." `date`
+echo "******************************************************************************"
+
+cd ${ORACLE_HOME}
+unzip -oq ${SOFTWARE_DIR}/{{ opatch_file }}
+
+echo "******************************************************************************"
+echo "Unzip software." `date`
+echo "******************************************************************************"
+
+cd ${SOFTWARE_DIR}
+unzip -oq ${SOFTWARE_DIR}/{{ patch_file }}
+
+echo "******************************************************************************"
+echo "Apply patches." `date`
+echo "******************************************************************************"
+
+cd {{ patch_path1 }}
+opatch prereq CheckConflictAgainstOHWithDetail -ph ./
+opatch apply -silent
+
+cd {{ patch_path2 }}
+opatch prereq CheckConflictAgainstOHWithDetail -ph ./
+opatch apply -silent
+
+touch ${ORACLE_HOME}/patched.ansible
+
+exit 0

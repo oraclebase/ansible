@@ -1,0 +1,27 @@
+- name: Check if dbora.service already exists
+  stat:
+    path: "/lib/systemd/system/dbora.service"
+  register: service_result
+
+- name: Copy dbora.service
+  copy:
+    src: "{{ software_dir }}/dbora.service"
+    dest: /lib/systemd/system/dbora.service
+    remote_src: yes
+    owner: root
+    group: root
+    mode: 0644
+  when: not service_result.stat.exists
+
+- name: Reload dbora.service
+  service:
+    name: dbora
+    state: reloaded
+  when: not service_result.stat.exists
+
+- name: Restart dbora.service
+  service:
+    name: dbora
+    state: restarted
+    enabled: yes
+  when: not service_result.stat.exists

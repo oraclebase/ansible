@@ -1,0 +1,8 @@
+- name: Check if data directory already exists
+  stat:
+    path: "{{ data_dir }}/{{ oracle_sid|upper }}"
+  register: db_result
+
+- name: Run Oracle patches
+  shell: "{{ software_dir }}/oracle_create_database.sh >> {{ software_dir }}/db.log"
+  when: not db_result.stat.exists
