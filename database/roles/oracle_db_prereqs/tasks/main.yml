@@ -6,7 +6,7 @@
     group: oinstall
   with_items:
     - "{{ scripts_dir }}"
-    - "{{ oracle_base }}/{{ oracle_home_ext }}"
+    - "{{ oracle_home }}"
     - "{{ data_dir }}"
     - "{{ software_dir }}"
 

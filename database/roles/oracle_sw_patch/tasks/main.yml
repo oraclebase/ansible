@@ -1,6 +1,6 @@
 - name: Check if patched.ansible file already exists
   stat:
-    path: "{{ oracle_base }}/{{ oracle_home_ext }}/patched.ansible"
+    path: "{{ oracle_home }}/patched.ansible"
   register: patch_result
 
 - name: Run Oracle patches

@@ -1,6 +1,6 @@
 - name: Check if root.sh already exists
   stat:
-    path: "{{ oracle_base }}/{{ oracle_home_ext }}/root.sh"
+    path: "{{ oracle_home }}/root.sh"
   register: root_sh_result
        
 - name: Oracle software-only install
