@@ -6,6 +6,7 @@ ip_address: 192.168.56.103
 # Paths
 oracle_base: /u01/app/oracle
 oracle_home_ext: product/19.0.0/dbhome_1
+oracle_home: "{{ oracle_base }}/{{ oracle_home_ext }}"
 ora_inventory: /u01/app/oraInventory
 data_dir: /u02/oradata
 scripts_dir: /home/oracle/scripts
@@ -21,8 +22,8 @@ db_software: LINUX.X64_193000_db_home.zip
 opatch_file: p6880880_190000_Linux-x86-64.zip
 patch_file: p33567270_190000_Linux-x86-64.zip
 patch_top: /u01/software/33567270
-patch_path1: /u01/software/33567270/33515361
-patch_path2: /u01/software/33567270/33561310
+patch_path1: "{{ patch_top }}/33515361"
+patch_path2: "{{ patch_top }}/33561310"
 
 # OS Packages
 packages:
