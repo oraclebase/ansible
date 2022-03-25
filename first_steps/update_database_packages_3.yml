@@ -12,7 +12,7 @@
     when: ansible_distribution in ["OracleLinux", "Red Hat Enterprise Linux", "CentOS"]
 
   - name: Update all packages (APT)
-    dnf:
+    apt:
       name: "*"
       update_cache: yes
       state: latest

@@ -13,7 +13,7 @@
     register: dnf_update
 
   - name: Update all packages (APT)
-    dnf:
+    apt:
       name: "*"
       update_cache: yes
       state: latest
