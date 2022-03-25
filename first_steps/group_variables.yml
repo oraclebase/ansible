@@ -1,5 +1,4 @@
 ---
-
 - name: Use group variables
   hosts: appservers
   tasks:

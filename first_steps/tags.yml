@@ -1,5 +1,4 @@
 ---
-
 - name: Using tags
   hosts: appservers
   become: true

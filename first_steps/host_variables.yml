@@ -1,3 +1,4 @@
+---
 - name: Use host variables
   hosts: databases
   become: true

@@ -1,5 +1,4 @@
 ---
-
 - name: Base role for all servers
   hosts: all
   become: true

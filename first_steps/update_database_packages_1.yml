@@ -1,5 +1,4 @@
 ---
-
 - name: Patch servers
   hosts: databases
   become: true

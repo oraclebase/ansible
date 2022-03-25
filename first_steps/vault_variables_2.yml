@@ -1,5 +1,4 @@
 ---
-
 - name: Use vault variables
   hosts: databases
   vars_files: my_vault.yml

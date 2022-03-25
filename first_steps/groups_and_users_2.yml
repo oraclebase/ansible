@@ -1,5 +1,4 @@
 ---
-
 - name: Create groups and users
   hosts: databases
   become: true

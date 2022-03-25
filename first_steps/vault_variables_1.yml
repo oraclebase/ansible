@@ -1,5 +1,4 @@
 ---
-
 - name: Use vault variables
   hosts: databases
   tasks:

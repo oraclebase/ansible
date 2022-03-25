@@ -1,5 +1,4 @@
 ---
-
 - name: Configure appservers
   hosts: appservers
   become: true

@@ -1,5 +1,4 @@
 ---
-
 - name: Configure NGINX servers
   hosts: appservers
   become: true
