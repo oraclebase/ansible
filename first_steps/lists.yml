@@ -1,5 +1,5 @@
 ---
-- name: Configure NGINX servers
+- name: Add basic packages
   hosts: all
   become: true
   tasks:
