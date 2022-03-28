@@ -18,8 +18,8 @@
       update_cache: yes
       state: latest
     when: ansible_distribution in ["Ubuntu", "Debian"]
-    register: atp_update
+    register: apt_update
 
   - name: Reboot server
     reboot:
-    when: dnf_update.changed or atp_update.changed
+    when: dnf_update.changed or apt_update.changed
