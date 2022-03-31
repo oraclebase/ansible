@@ -9,12 +9,17 @@
       state: present
       dest: /etc/nginx/nginx.conf
       line: "# One silly a line added."
-    notify: Reboot nginx
+    notify:
+      - Restart nginx
+      - Restart firewall
 
-  - name: Amend nginx.conf
-    lineinfile:
-      state: present
-      dest: /etc/nginx/nginx.conf
-      line: "# Another silly a line added."
-    notify: Reboot nginx
+  handlers:
+  - name: Restart nginx
+    service:
+      name: nginx
+      state: restarted
 
+  - name: Restart firewall
+    service:
+      name: firewalld
+      state: restarted
