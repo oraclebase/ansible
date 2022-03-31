@@ -10,7 +10,7 @@
       - { port: 8443/tcp, state: disabled }
   tasks:
 
-  - name: Allow web through the firewall
+  - name: Allow web traffic through the firewall
     firewalld:
       port: "{{ item.port }}"
       permanent: yes
