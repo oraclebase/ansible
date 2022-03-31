@@ -23,4 +23,3 @@
       name: nginx
       state: restarted
     when: nginx1.changed or nginx2.changed
-

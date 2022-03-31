@@ -16,4 +16,3 @@
       name: nginx
       state: restarted
     when: nginx1.changed
-
