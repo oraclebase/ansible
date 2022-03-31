@@ -1,0 +1,15 @@
+---
+- name: Configure appservers
+  hosts: appservers
+  become: true
+  tasks:
+
+  - name: Amend nginx.conf
+    lineinfile:
+      state: present
+      dest: /etc/nginx/nginx.conf
+      line: "# One silly a line added."
+    notify: "restart stuff"
+
+  handlers:
+  - import_tasks: handlers/main.yml
