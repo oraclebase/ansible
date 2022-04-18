@@ -33,3 +33,10 @@
     enabled: yes
     state: started
 
+- name: Copy default web page
+  copy:
+    src: default_page.html
+    dest: /usr/share/nginx/html/index.html
+    owner: root
+    group: root
+    mode: 0644
